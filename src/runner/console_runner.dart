@@ -11,6 +11,7 @@ class ConsoleRunner {
       block.blockFunction();
     } catch(Exception ex, var stack) {
       print('${blockLevelIndent(blockLevel)}  $ex');
+      print('${blockLevelIndent(blockLevel)}   ${stack}');
     }
     block.startProcessingBlock();
     block.containedBlocks().forEach((Block containedBlock) {

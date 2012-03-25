@@ -2,6 +2,7 @@ basicTests() {
   describe('equal matcher', () {
     it('should work for equal ints', () => expect(1).to(equal(1)));
     it('should work for equal Strings', () => expect('test').to(equal('test')));
+    it('should work for equal objects', () => expect(new Duration(1, 1, 1, 1, 1)).to(equal(new Duration(1, 1, 1, 1, 1))));
   });
 
   describe('not matcher', () {

@@ -1,2 +1,3 @@
 tests/console_tests.dart
+tests/browser_tests.dart
 src/dahlia.dart

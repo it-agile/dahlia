@@ -6,11 +6,11 @@ class EqualMatcher implements Matcher {
   const EqualMatcher(this.expected);
   
   matches(var actual) {
-    return (expected === actual);
+    return (expected == actual);
   }
   
   String describeExpectation(var actual) {
-    return 'actual "$actual" to equal the exepected "$expected"';    
+    return 'actual "$actual" to equal the expected "$expected"';
   }
 }
 
