@@ -1,25 +1,32 @@
 class ConsoleRunner {
   
-  run() {
+  void run() {
     processBlock(_rootBlock, 0);
   }
   
-  processBlock(Block block, int blockLevel) {
+  void processBlock(Block block, int blockLevel) {
     _switchTo(block);
+    executeBlock(block, blockLevel);
+    block.startProcessingBlock();
+    processContainedBlocks(block, blockLevel);
+    block.finishProcessingBlock();
+  }
+  
+  void executeBlock(Block block, int blockLevel) {
     print('${blockLevelIndent(blockLevel)}${block.blockDescription}');
     try {
       block.blockFunction();
     } catch(var ex, var stack) {
-      print('${blockLevelIndent(blockLevel)}  $ex');
-      print('${blockLevelIndent(blockLevel)}   ${stack}');
+      printStacktrace(blockLevel, ex, stack);
     }
-    block.startProcessingBlock();
+  }
+  
+  void processContainedBlocks(Block block, int blockLevel) {
     block.containedBlocks().forEach((Block containedBlock) {
       block.startProcessingContainedBlock();
       processBlock(containedBlock, blockLevel + 1);
       block.finishProcessingContainedBlock();
     });
-    block.finishProcessingBlock();
   }
   
   String blockLevelIndent(int blockLevel) {
@@ -29,6 +36,12 @@ class ConsoleRunner {
     }
     
     return buffer.toString();
+  }
+  
+  void printStacktrace(int blockLevel, var exception, var stack) {
+    print('${blockLevelIndent(blockLevel)}  $exception');
+    String stackString = stack.toString().replaceAll(new RegExp(@"^ ", true), '${blockLevelIndent(blockLevel)}    ');
+    print('$stackString');
   }
   
 }
