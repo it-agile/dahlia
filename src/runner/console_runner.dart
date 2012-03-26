@@ -9,7 +9,7 @@ class ConsoleRunner {
     print('${blockLevelIndent(blockLevel)}${block.blockDescription}');
     try {
       block.blockFunction();
-    } catch(Exception ex, var stack) {
+    } catch(var ex, var stack) {
       print('${blockLevelIndent(blockLevel)}  $ex');
       print('${blockLevelIndent(blockLevel)}   ${stack}');
     }

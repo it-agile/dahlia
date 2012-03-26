@@ -1,10 +1,9 @@
 #library('runs all tests on the console');
 
 #import('../src/dahlia.dart');
-
-#source('basic_tests.dart');
+#import('test_suites.dart');
 
 main() {
-  basicTests();
+  testSuites();
   new ConsoleRunner().run();  
 }

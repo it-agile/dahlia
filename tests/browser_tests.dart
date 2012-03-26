@@ -1,9 +1,9 @@
 #import('dart:html');
 #import('../src/dahlia.dart');
 
-#source('basic_tests.dart');
+#import('test_suites.dart');
 
-void main() {
-  basicTests();
+main() {
+  testSuites();
   new ConsoleRunner().run();  
 }
