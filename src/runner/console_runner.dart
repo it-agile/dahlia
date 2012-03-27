@@ -1,21 +1,29 @@
 class ConsoleRunner {
   int _numberOfSpecs;
   int _numberOfFailures;
+  int _numberOfCrashes;
   
   void run() {
     _numberOfSpecs = 0;
     _numberOfFailures = 0;
+    _numberOfCrashes = 0;
     processBlock(_rootBlock, 0);
     print('');
-    print('specs: $_numberOfSpecs, failures: $_numberOfFailures');
+    print('specs: $numberOfSpecs, failures: $numberOfFailures, crashes: $numberOfCrashes');
   }
   
   void processBlock(Block block, int blockLevel) {
     _switchTo(block);
     executeBlock(block, blockLevel);
-    block.startProcessingBlock();
-    processContainedBlocks(block, blockLevel);
-    block.finishProcessingBlock();
+    try {
+      block.startProcessingBlock();
+      processContainedBlocks(block, blockLevel);
+      block.finishProcessingBlock();
+    } catch(var thrown, var stack) {
+      addToNumberOfCrashes(block);
+      print('${blockLevelIndent(blockLevel)}  Unhandled error while processing block. Ignoring rest of block.');
+      printStacktrace(blockLevel, thrown, stack);
+    }
   }
   
   void executeBlock(Block block, int blockLevel) {
@@ -64,5 +72,13 @@ class ConsoleRunner {
       _numberOfFailures++;
     }
   }
+  
+  void addToNumberOfCrashes(Block block) {
+    _numberOfCrashes++;
+  }
+  
+  int get numberOfSpecs() => _numberOfSpecs;
+  int get numberOfFailures() => _numberOfFailures;
+  int get numberOfCrashes() => _numberOfCrashes;
   
 }

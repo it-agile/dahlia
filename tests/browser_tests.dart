@@ -1,5 +1,3 @@
-#library('dahlia browser tests');
-
 #import('dart:html');
 #import('../src/dahlia.dart');
 

@@ -1,6 +1,6 @@
 #library('Dahlia BDD-style testing framework for Dart');
 
-#source('matcher/matcherbase.dart');
+#source('matcher/matcher_base.dart');
 #source('matcher/general.dart');
 
 #source('test/expectation.dart');
