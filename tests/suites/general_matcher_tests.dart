@@ -1,8 +1,8 @@
 generalMatcherTests() {
   describe('equal matcher', () {
-    it('should work for equal ints', () => expect(1).to(equal(1)));
-    it('should work for equal Strings', () => expect('test').to(equal('test')));
-    it('should work for equal objects', () => expect(new Duration(1, 1, 1, 1, 1)).to(equal(new Duration(1, 1, 1, 1, 1))));
+    it('should succeed for equal ints', () => expect(1).to(equal(1)));
+    it('should succeed for equal Strings', () => expect('test').to(equal('test')));
+    it('should succeed for equal objects', () => expect(new Duration(1, 1, 1, 1, 1)).to(equal(new Duration(1, 1, 1, 1, 1))));
     it('should have a description based on the actual and excepted values', () => expect(equal('ex').describeExpectation('ac')).to(equal('actual "ac" to equal the expected "ex"')));
   });
 

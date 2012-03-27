@@ -1,11 +1,22 @@
 blockTests() {
   describe('block', () {
-    int counter = 0;
-    
-    beforeAll(() => counter = 10);
-    beforeEach(() => counter++);
-    
-    it('should call beforeAll once before any contained block', () => expect(counter).to(equal(11)));
-    it('should call beforeEach once before each contained block', () => expect(counter).to(equal(12)));
+    int afterAllCounter = 0;
+    int beforeAllCounter = 0;
+
+    describe('contained block', () {
+      int beforeEachCounter = 0;
+      int afterEachCounter = 0;
+      
+      beforeAll(() => beforeAllCounter++);
+      beforeEach(() => beforeEachCounter++);
+      afterEach(() => afterEachCounter++);
+      afterAll(() => afterAllCounter++);
+      
+      it('should not call afterAll before all contained blocks are processed', () => expect(afterAllCounter).to(equal(0)));
+      it('should call beforeEach once before each contained block', () => expect(beforeEachCounter).to(equal(2)));
+      it('should call afterEach once after each contained block', () => expect(afterEachCounter).to(equal(2)));
+    });
+    it('should call beforeAll once before any contained block', () => expect(beforeAllCounter).to(equal(1)));
+    it('should call afterAll once after all contained blocks', () => expect(afterAllCounter).to(equal(1)));
   });
 }

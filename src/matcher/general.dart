@@ -1,6 +1,6 @@
 EqualMatcher equal(var expected) => new EqualMatcher(expected);
 NotMatcher not(Matcher matcher) => new NotMatcher(matcher);
-ThrowMatcher throwA([Function exceptionChecker, String exceptionType]) => new ThrowMatcher(exceptionChecker, exceptionType);
+ThrowMatcher throwA([ExceptionCheckerFunction exceptionChecker, String exceptionType]) => new ThrowMatcher(exceptionChecker, exceptionType);
 
 class EqualMatcher implements Matcher {
   final expected;
@@ -28,8 +28,10 @@ class NotMatcher implements Matcher {
   }
 }
 
+typedef ExceptionCheckerFunction(var thrown);
+
 class ThrowMatcher implements Matcher {
-  final Function exceptionChecker;
+  final ExceptionCheckerFunction exceptionChecker;
   final String exceptionType;
   const ThrowMatcher([this.exceptionChecker, this.exceptionType]);
   
