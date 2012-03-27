@@ -3,8 +3,8 @@
 #source('matcher/matcher_base.dart');
 #source('matcher/general.dart');
 
-#source('test/expectation.dart');
-#source('test/block.dart');
+#source('structure/expectation.dart');
+#source('structure/block.dart');
 
 #source('runner/runner.dart');
 #source('runner/console_reporter.dart');
