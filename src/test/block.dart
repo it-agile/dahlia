@@ -14,7 +14,7 @@ class Block {
 
   startProcessingBlock(){}
   finishProcessingBlock(){}
-  List<Block> containedBlocks() => [];
+  List<Block> get containedBlocks() => [];
   startProcessingContainedBlock(){}
   finishProcessingContainedBlock(){}
   abstract addBlock(Block block);
@@ -48,7 +48,7 @@ class DescribeBlock extends Block {
   finishProcessingBlock() {
     if (_afterAll !== null) _afterAll();
   }
-  List<Block> containedBlocks() {
+  List<Block> get containedBlocks() {
     return blocks;
   }
   startProcessingContainedBlock() {

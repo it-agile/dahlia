@@ -5,5 +5,5 @@
 
 main() {
   testSuites();
-  new ConsoleRunner().run();  
+  new Runner([new ConsoleReporter()]).run();  
 }

@@ -6,4 +6,6 @@
 #source('test/expectation.dart');
 #source('test/block.dart');
 
-#source('runner/console_runner.dart');
+#source('runner/runner.dart');
+#source('runner/console_reporter.dart');
+#source('runner/default_block_switcher.dart');
