@@ -2,6 +2,7 @@
 
 #source('matcher/matcher_base.dart');
 #source('matcher/general.dart');
+#source('matcher/string.dart');
 
 #source('structure/expectation.dart');
 #source('structure/block.dart');
