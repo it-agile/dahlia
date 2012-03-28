@@ -28,8 +28,8 @@ class Runner {
   void processBlock(Block block) {
     _blockSwitcher.switchTo(block);
     _reporters.forEach((Reporter reporter) => reporter.blockProcessingStarted(block));
-    executeBlock(block);
     try {
+      executeBlock(block);
       block.startProcessingBlock();
       processContainedBlocks(block);
       block.finishProcessingBlock();
@@ -46,8 +46,12 @@ class Runner {
     try {
       block.blockFunction();
     } catch(var thrown, var stack) {
-      addToNumberOfFailures(block);
-      _reporters.forEach((Reporter reporter) => reporter.failureOccurred(block, thrown, stack));
+      if (block.countableAsSpec) {
+        addToNumberOfFailures(block);
+        _reporters.forEach((Reporter reporter) => reporter.failureOccurred(block, thrown, stack));
+      } else {
+        throw thrown;
+      }
     }
     _reporters.forEach((Reporter reporter) => reporter.blockExecutionFinshed(block));
   }
