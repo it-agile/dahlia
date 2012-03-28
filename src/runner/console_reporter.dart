@@ -46,8 +46,13 @@ class ConsoleReporter implements Reporter {
   
   void printStacktrace(var exception, var stack) {
     print('${blockLevelIndent(_currentBlockLevel)}  $exception');
-    String stackString = stack.toString().replaceAll(new RegExp(@"^ ", true), '${blockLevelIndent(_currentBlockLevel)}    ');
-    stackString = stackString.toString().replaceAll(new RegExp(@"^E", true), '${blockLevelIndent(_currentBlockLevel)}   E');
-    print('$stackString');
+    print('');
+    stack.toString().split(new RegExp(@"^", true)).forEach((stackLine) {
+      String trimmedStackLine = stackLine.trim();
+      if(trimmedStackLine.length > 0) {
+        print('${blockLevelIndent(_currentBlockLevel)}    ${stackLine.trim()}');
+      }
+    });
+    print('');
   }
 }
