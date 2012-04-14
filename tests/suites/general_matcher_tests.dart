@@ -10,6 +10,27 @@ generalMatcherTests() {
     it('should succeed if the expected value does not match with the actual matcher', () => expect(1).to(not(equal(2))));
   });
 
+  describe('be true matcher', () {
+    it('should succeed if the actual value is true', () => expect(true).to(beTrue()));
+    it('should succeed if the actual value is a true expression', () => expect(1 == 1).to(beTrue()));
+    it('should fail if the actual value is false', () => expect(false).to(not(beTrue())));
+    it('should fail if the actual value is a false expression', () => expect(2 == 1).to(not(beTrue())));
+    it('should fail if the actual value is not a bool value', () => expect(2).to(not(beTrue())));
+  });
+
+  describe('be false matcher', () {
+    it('should succeed if the actual value is false', () => expect(false).to(beFalse()));
+    it('should succeed if the actual value is a false expression', () => expect(2 == 1).to(beFalse()));
+    it('should succeed if the actual value is not a bool value', () => expect(2).to(beFalse()));
+    it('should fail if the actual value is true', () => expect(true).to(not(beFalse())));
+    it('should fail if the actual value is a true expression', () => expect(1 == 1).to(not(beFalse())));
+  });
+
+  describe('be null matcher', () {
+    it('should succeed if the actual value is null', () => expect(null).to(beNull()));
+    it('should fail if the actual value is not null', () => expect(2).to(not(beNull())));
+  });
+
   describe('throw matcher', () {
     describe('with no parameters', () {
       ThrowMatcher throwMatcher = throwA();

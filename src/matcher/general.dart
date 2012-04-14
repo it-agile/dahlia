@@ -1,31 +1,39 @@
 EqualMatcher equal(var expected) => new EqualMatcher(expected);
 NotMatcher not(Matcher matcher) => new NotMatcher(matcher);
+BeTrueMatcher beTrue() => new BeTrueMatcher();
+BeFalseMatcher beFalse() => new BeFalseMatcher();
+BeNullMatcher beNull() => new BeNullMatcher();
 ThrowMatcher throwA([ExceptionCheckerFunction exceptionChecker, String exceptionType]) => new ThrowMatcher(exceptionChecker, exceptionType);
 
 class EqualMatcher implements Matcher {
   final expected;
   const EqualMatcher(this.expected);
   
-  matches(var actual) {
-    return (expected == actual);
-  }
-  
-  String describeExpectation(var actual) {
-    return 'actual "$actual" to equal the expected "$expected"';
-  }
+  bool matches(var actual) => (expected == actual);
+  String describeExpectation(var actual) => 'actual "$actual" to equal the expected "$expected"';
 }
 
 class NotMatcher implements Matcher {
   final Matcher matcherToNegate;
   const NotMatcher(this.matcherToNegate);
   
-  matches(var actual) {
-    return !matcherToNegate.matches(actual);
-  }
-  
-  String describeExpectation(var actual) {
-    return 'not(${matcherToNegate.describeExpectation(actual)})';    
-  }
+  bool matches(var actual) => !matcherToNegate.matches(actual);
+  String describeExpectation(var actual) => 'not(${matcherToNegate.describeExpectation(actual)})';    
+}
+
+class BeTrueMatcher implements Matcher {
+  bool matches(final actual) => actual == true;
+  String describeExpectation(var actual) => 'actual "$actual" to be true';
+}
+
+class BeFalseMatcher implements Matcher {
+  bool matches(final actual) => actual != true;
+  String describeExpectation(var actual) => 'actual "$actual" to be false';
+}
+
+class BeNullMatcher implements Matcher {
+  bool matches(final actual) => actual == null;
+  String describeExpectation(var actual) => 'actual "$actual" to be null';
 }
 
 typedef ExceptionCheckerFunction(var thrown);
